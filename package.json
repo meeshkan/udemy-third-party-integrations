@@ -7,6 +7,8 @@
   },
   "dependencies": {
     "@zeit/next-typescript": "^1.1.0",
+    "axios": "^0.18.0",
+    "mongo-mock": "^3.3.2",
     "next": "^7.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0"
@@ -20,6 +22,7 @@
     "nodemon": "^1.18.8",
     "ts-jest": "^23.10.5",
     "ts-node": "^7.0.1",
-    "typescript": "^3.2.0"
+    "typescript": "^3.2.0",
+    "unmock": "^0.0.12"
   }
 }
