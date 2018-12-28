@@ -1,8 +1,8 @@
-import axios from 'axios';
 import * as mongodb from 'mongo-mock';
 import { createServer } from 'http'
 import { parse } from 'url'
 import * as next from 'next'
+import { postEmailToSendgrid } from "./util";
 
 const unmockify = async () => {
   if (process.env.NODE_ENV !== "production") {
@@ -36,19 +36,7 @@ app.prepare()
       if (findArray.length === 0) {
         console.log('now inserting email');
         collection.insert({ email });
-        await axios.post("https://api.sendgrid.com/v3/mail/send", {
-          personalizations: [{
-            to: {
-              email,
-            }
-          }],
-          subject: "hi there!",
-          from: { email: "mike@porterduff.io", name: "Mike Solomon"}
-        }, {
-          headers: {
-            Authorization: `Bearer u_n_m_o_c_k_200` // change to process.env
-          }
-        });
+        await postEmailToSendgrid(email);
       } else {
         console.log('email already inserted - skipping insert');
       }
