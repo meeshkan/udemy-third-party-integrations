@@ -7,7 +7,7 @@ import { postEmailToSendgrid } from "./util";
 const unmockify = async () => {
   if (process.env.NODE_ENV !== "production") {
     const { unmock } = require("unmock");
-    await unmock({ ignore: "story "});
+    await unmock({ ignore: "story"});
   }
 }
 
