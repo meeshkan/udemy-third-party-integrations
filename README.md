@@ -1,3 +1,4 @@
-# Meeshkan udemy course on building apps with third party integrations
+# Udemy course
+## Building apps with third party integrations
 
 Have fun!
