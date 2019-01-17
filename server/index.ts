@@ -1,17 +1,9 @@
 import * as mongodb from 'mongo-mock';
-import { createServer } from 'http'
-import { parse } from 'url'
-import * as next from 'next'
+import { createServer } from 'http';
+import { unmockDev } from 'unmock';
+import { parse } from 'url';
+import * as next from 'next';
 import { postEmailToSendgrid } from "./util";
-
-const unmockify = async () => {
-  if (process.env.NODE_ENV !== "production") {
-    const { unmock } = require("unmock");
-    await unmock({ ignore: "story"});
-  }
-}
-
-unmockify();
 
 const MongoClient = mongodb.MongoClient;
 
@@ -21,6 +13,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 
 app.prepare()
+.then(async () => await unmockDev())
 .then(() => {
   createServer(async (req, res) => {
     const parsedUrl = parse(req.url, true)
