@@ -12,7 +12,7 @@
     "next": "^7.0.2",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
-    "unmock": "^0.0.17"
+    "unmock": "^0.0.21"
   },
   "devDependencies": {
     "@types/jest": "^23.3.10",
