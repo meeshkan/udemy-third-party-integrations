@@ -1,6 +1,6 @@
 import * as mongodb from 'mongo-mock';
 import { createServer } from 'http';
-import { unmockDev } from 'unmock';
+import { unmock } from 'unmock';
 import { parse } from 'url';
 import * as next from 'next';
 import { postEmailToSendgrid } from "./util";
@@ -13,7 +13,7 @@ const app = next({ dev })
 const handle = app.getRequestHandler()
 
 app.prepare()
-.then(async () => await unmockDev())
+.then(async () => await unmock({ ignore: "story" }))
 .then(() => {
   createServer(async (req, res) => {
     const parsedUrl = parse(req.url, true)
