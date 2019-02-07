@@ -13,7 +13,7 @@ const app = next({ dev });
 const handle = app.getRequestHandler();
 
 app.prepare()
-.then(async () => await unmock({ ignore: "story" }))
+.then(async () => await unmock({ ignore: "story", token: process.env.UNMOCK_TOKEN }))
 .then(() => {
   createServer(async (req, res) => {
     const parsedUrl = parse(req.url, true);
