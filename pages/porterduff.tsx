@@ -1,4 +1,4 @@
-import { Box, Button, Grid } from "grommet";
+import { Box, Button, Grid, Heading, Layer } from "grommet";
 import React from "react";
 import { unmock } from "unmock";
 import { getProject, getProjectsAndComments } from "./util";
@@ -28,7 +28,13 @@ class Porterduff extends React.Component<{
     }
     public render() {
         const { projects, comments } = this.props;
-        const { detailedProjects } = this.state;
+        const { commentsOpen, descriptionOpen, detailedProjects } = this.state;
+        const closeComment = (id) => () => {
+            this.setState({ commentsOpen: { ...commentsOpen, [id]: false }});
+        };
+        const closeDescription = (id) => () => {
+            this.setState({ descriptionOpen: { ...descriptionOpen, [id]: false }});
+        };
         return (<Grid
             columns={{
               count: 3,
@@ -37,24 +43,54 @@ class Porterduff extends React.Component<{
             gap="small"
           >{projects.map((project, i) => (
             <Box gap="small" direction="column" justify="center" pad="medium" elevation="small" key={`project_${i}`}>
-        <h3>{project.name}</h3>
+        <Heading level="3">{project.name}</Heading>
         <img style={{display: "block", width: "270px", height: "270px"}} src={project.covers["202"]} />
-        {
-            detailedProjects[project.id] ?
-            <div>{detailedProjects[project.id].description}</div> :
-            <div><Button margin={{right: "small"}} primary onClick={async () => {
+        <div>
+            <Button margin={{right: "small"}} primary onClick={async () => {
                 const detailedProject = await getProject(project.id);
                 this.setState({
+                    descriptionOpen: {
+                        ...descriptionOpen,
+                        [project.id]: true,
+                    },
                     detailedProjects: {
-                        ...this.state.detailedProjects,
+                        ...detailedProjects,
                         [project.id]: detailedProject,
                     },
                 });
-            }} label="Description"></Button><Button label="Comments"></Button></div>
+            }} label="Description"></Button>
+            <Button onClick={() => {
+                this.setState({ commentsOpen: { ...commentsOpen, [project.id]: true }});
+            }} label="Comments"></Button>
+        </div>
+        {
+            commentsOpen[project.id] && <Layer
+                position="center"
+                modal
+                onClickOutside={closeComment(project.id)}
+                onEsc={closeComment(project.id)}
+            >
+                <Box pad="medium" flex overflow="auto">
+                    <Heading level="3">Comments about {project.name}</Heading>
+                    <div>{comments[i].comments.map((comment, j) =>
+                        <div key={`comment_${i}_${j}`}><strong>{comment.user.first_name} said </strong>
+                            {comment.comment}<hr /></div>)}</div>
+                </Box>
+            </Layer>
         }
-        {/*
-            <div>{comments[i].comments.map((comment, j) =>
-                <div key={`comment_${i}_${j}`}><strong>Awesome comment</strong> {comment.comment}</div>)}</div>*/}
+        {
+            descriptionOpen[project.id] && <Layer
+                position="center"
+                modal
+                onClickOutside={closeDescription(project.id)}
+                onEsc={closeDescription(project.id)}
+            >
+                <Box pad="medium" flex overflow="auto">
+                    <Heading level="3">Say hi to {project.name}</Heading>
+                    <div>{detailedProjects[project.id].description}</div>
+                </Box>
+            </Layer>
+        }
     </Box>))}</Grid>);
     }
 }

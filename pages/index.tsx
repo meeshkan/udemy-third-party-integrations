@@ -1,4 +1,4 @@
-import { Button, Form, FormField } from "grommet";
+import { Box, Button, Form, FormField } from "grommet";
 import React from "react";
 
 export default class EmailForm extends React.Component<{
@@ -16,10 +16,12 @@ export default class EmailForm extends React.Component<{
 
   public render() {
     return (
-      <Form onSubmit={this.handleSubmit}>
-        <FormField name="email" label="E-mail"  />
-        <Button type="submit" primary label="Submit" />
-      </Form>
+      <Box pad="xlarge">
+        <Form onSubmit={this.handleSubmit}>
+          <FormField name="email" label="E-mail"  />
+          <Button type="submit" primary label="Submit" />
+        </Form>
+      </Box>
     );
   }
 
