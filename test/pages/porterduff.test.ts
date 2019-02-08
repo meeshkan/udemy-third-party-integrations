@@ -1,7 +1,7 @@
 import { unmock } from "unmock";
 import { getProjectsAndComments } from "../../pages/util";
 
-beforeEach(async () => await unmock());
+beforeEach(async () => await unmock({ token: process.env.UNMOCK_TOKEN }));
 
 test("will succeed, using unmock", async () => {
     const { projects, comments } = await getProjectsAndComments();
