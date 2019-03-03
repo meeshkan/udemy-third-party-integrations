@@ -6,6 +6,7 @@ import { getProject, getProjectsAndComments } from "./util";
 class Porterduff extends React.Component<{
     comments: any;
     projects: any;
+    projectsErrorCode: number,
 }, {
     detailedProjects: any;
     commentsOpen: any;
@@ -27,7 +28,7 @@ class Porterduff extends React.Component<{
         }
     }
     public render() {
-        const { projects, comments } = this.props;
+        const { projectsErrorCode, projects, comments } = this.props;
         const { commentsOpen, descriptionOpen, detailedProjects } = this.state;
         const closeComment = (id) => () => {
             this.setState({ commentsOpen: { ...commentsOpen, [id]: false }});
@@ -35,7 +36,10 @@ class Porterduff extends React.Component<{
         const closeDescription = (id) => () => {
             this.setState({ descriptionOpen: { ...descriptionOpen, [id]: false }});
         };
-        return (<Grid
+        return (projectsErrorCode !== null ?
+            <div><Heading level="3">Well, this is embarassing...</Heading>
+                <p>It looks like we couldn't fetch any projects. Please try again soon!</p></div> :
+            <Grid
             columns={{
               count: 3,
               size: "auto",
