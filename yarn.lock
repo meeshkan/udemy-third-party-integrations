@@ -775,6 +775,11 @@
   resolved "https://registry.yarnpkg.com/@types/jest/-/jest-23.3.10.tgz#4897974cc317bf99d4fe6af1efa15957fa9c94de"
   integrity sha512-DC8xTuW/6TYgvEg3HEXS7cu9OijFqprVDXXiOcdOKZCU/5PJNLZU37VVvmZHdtMiGOa8wAA/We+JzbdxFzQTRQ==
 
+"@types/js-yaml@^3.12.0":
+  version "3.12.1"
+  resolved "https://registry.yarnpkg.com/@types/js-yaml/-/js-yaml-3.12.1.tgz#5c6f4a1eabca84792fbd916f0cb40847f123c656"
+  integrity sha512-SGGAhXLHDx+PK4YLNcNGa6goPf9XRWQNAUUbffkwVGGXIxmDKWyGGL4inzq2sPmExu431Ekb9aEMn9BkPqEYFA==
+
 "@types/mkdirp@^0.5.2":
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/@types/mkdirp/-/mkdirp-0.5.2.tgz#503aacfe5cc2703d5484326b1b27efa67a339c1f"
@@ -4344,6 +4349,14 @@ js-tokens@^3.0.2:
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-3.0.2.tgz#9866df395102130e38f7f996bceb65443209c25b"
   integrity sha1-mGbfOVECEw449/mWvOtlRDIJwls=
 
+js-yaml@^3.13.0:
+  version "3.13.0"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.0.tgz#38ee7178ac0eea2c97ff6d96fff4b18c7d8cf98e"
+  integrity sha512-pZZoSxcCYco+DIKBTimr67J6Hy+EYGZDY/HCWC+iAEA9h1ByhMXAIVUXMcMFpOCxQ/xjXmPI2MkDL5HRm5eFrQ==
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
+
 js-yaml@^3.7.0:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
@@ -7224,13 +7237,14 @@ unique-string@^1.0.0:
   dependencies:
     crypto-random-string "^1.0.0"
 
-unmock@^0.0.32:
-  version "0.0.32"
-  resolved "https://registry.yarnpkg.com/unmock/-/unmock-0.0.32.tgz#7ca9a80e15099141b9e3da627c0df465f76e6de7"
-  integrity sha512-QyBbs4wgBOZZ65GPIQsPlpUlNttXpIfzAuG2yHMV2FXOG5iLwp7eeS4nrvZXUotnCG/7UxVAGRJZ1u8iimfHNA==
+unmock@^0.0.40:
+  version "0.0.40"
+  resolved "https://registry.yarnpkg.com/unmock/-/unmock-0.0.40.tgz#df2fc102731204d9c92bbab911999e33570df3b1"
+  integrity sha512-fSElLBjqgjVp2saGIKdIwXHP48UsA4gfbunFq9Jj014HKS3xqKd0DESi8Pr9KNHJQl4yMiDPMeYye/0CVfCy4A==
   dependencies:
     "@types/detect-node" "^2.0.0"
     "@types/ini" "^1.3.30"
+    "@types/js-yaml" "^3.12.0"
     "@types/mkdirp" "^0.5.2"
     axios "^0.18.0"
     cli-spinner "^0.2.8"
@@ -7238,6 +7252,7 @@ unmock@^0.0.32:
     detect-node "^2.0.4"
     follow-redirects "^1.5.9"
     ini "^1.3.5"
+    js-yaml "^3.13.0"
     mkdirp "^0.5.1"
     node-fetch "^2.3.0"
     ora "^3.0.0"
